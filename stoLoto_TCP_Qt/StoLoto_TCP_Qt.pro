@@ -19,6 +19,7 @@ HEADERS += \
     graphics/scene.h \
     mainwindow.h \
     utils/config.h \
+    utils/debugsettings.h \
     widgets/startform.h
 
 FORMS += \

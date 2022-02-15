@@ -30,11 +30,19 @@ GAME_OPTIONS StartForm::getGameOptions() const
 void StartForm::slotStartSinglePlay()
 {
 	m_gameOptions = GAME_OPTIONS::SINGLE_PLAY;
-	emit sigLaunchGame();
+
+	applyOptions();
 }
 
 void StartForm::slotStartOnlinePlay()
 {
 	m_gameOptions = GAME_OPTIONS::MULTI_PLAY;
+
+	applyOptions();
+}
+
+void StartForm::applyOptions()
+{
+	g_config.m_name = ui->le_name->text();
 	emit sigLaunchGame();
 }

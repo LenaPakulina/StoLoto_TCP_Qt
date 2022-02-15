@@ -33,6 +33,9 @@ signals:
 private:
 	Ui::StartForm *ui;
 	GAME_OPTIONS	m_gameOptions;
+
+private:
+	void applyOptions();
 };
 
 #endif // STARTFORM_H

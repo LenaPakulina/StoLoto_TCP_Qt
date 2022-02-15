@@ -25,6 +25,5 @@ MainWindow::~MainWindow()
 
 void MainWindow::slotStartGame()
 {
-
 }
 
