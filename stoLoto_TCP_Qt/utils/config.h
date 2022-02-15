@@ -3,9 +3,8 @@
 
 #include <QString>
 
-class Config
+struct Config
 {
-public:
 	Config();
 
 	/// Имя игрока - пользователя

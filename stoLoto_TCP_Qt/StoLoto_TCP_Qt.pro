@@ -13,17 +13,22 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     utils/config.cpp \
-    widgets/startform.cpp
+    widgets/lotoform.cpp \
+    widgets/startform.cpp \
+    widgets/ticket.cpp
 
 HEADERS += \
     graphics/scene.h \
     mainwindow.h \
     utils/config.h \
     utils/debugsettings.h \
-    widgets/startform.h
+    widgets/lotoform.h \
+    widgets/startform.h \
+    widgets/ticket.h
 
 FORMS += \
     mainwindow.ui \
+    widgets/lotoform.ui \
     widgets/startform.ui
 
 # Default rules for deployment.

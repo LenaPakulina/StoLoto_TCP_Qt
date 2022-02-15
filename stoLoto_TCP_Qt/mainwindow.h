@@ -7,6 +7,9 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+class StartForm;
+class LotoForm;
+
 class MainWindow : public QMainWindow
 {
 	Q_OBJECT
@@ -20,5 +23,8 @@ public slots:
 
 private:
 	Ui::MainWindow *ui;
+
+	StartForm	*m_startForm;
+	LotoForm	*m_lotoForm;
 };
 #endif // MAINWINDOW_H

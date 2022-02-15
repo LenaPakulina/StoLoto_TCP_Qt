@@ -8,6 +8,8 @@ StartForm::StartForm(QWidget *parent) :
 {
 	ui->setupUi(this);
 	m_gameOptions = GAME_OPTIONS::UNKNOWN;
+	ui->pb_playingOnline->setEnabled(false);
+	ui->le_name->setText(g_config.m_name);
 
 	connect(ui->pb_playSingle,
 			SIGNAL(clicked(bool)),
