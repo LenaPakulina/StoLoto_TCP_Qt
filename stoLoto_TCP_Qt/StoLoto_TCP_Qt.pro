@@ -15,7 +15,8 @@ SOURCES += \
     utils/config.cpp \
     widgets/lotoform.cpp \
     widgets/startform.cpp \
-    widgets/ticket.cpp
+    widgets/ticket.cpp \
+    widgets/ticketcell.cpp
 
 HEADERS += \
     graphics/scene.h \
@@ -24,7 +25,8 @@ HEADERS += \
     utils/debugsettings.h \
     widgets/lotoform.h \
     widgets/startform.h \
-    widgets/ticket.h
+    widgets/ticket.h \
+    widgets/ticketcell.h
 
 FORMS += \
     mainwindow.ui \
