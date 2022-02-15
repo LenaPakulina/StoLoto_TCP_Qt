@@ -1,0 +1,7 @@
+*.user
+*.autosave
+*.o
+*.a
+*.pro.user*
+build-*
+.~lock*
