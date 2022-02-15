@@ -12,11 +12,13 @@ SOURCES += \
     graphics/scene.cpp \
     main.cpp \
     mainwindow.cpp \
+    utils/config.cpp \
     widgets/startform.cpp
 
 HEADERS += \
     graphics/scene.h \
     mainwindow.h \
+    utils/config.h \
     widgets/startform.h
 
 FORMS += \
