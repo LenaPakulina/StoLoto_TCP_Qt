@@ -7,11 +7,12 @@ struct Config
 {
 	Config();
 
-	/// Имя игрока - пользователя
-	QString		m_name;
+	QString		m_name;			///< Имя игрока - пользователя
+	int8_t		m_ticketCount;	///< Кол-во билетов на руках играков
 
-	/// Кол-во билетов на руках играков
-	int8_t		m_ticketCount;
+	int8_t		m_vertCountNum;
+	int8_t		m_horzCountNum;
+	int8_t		m_goalCountNum;
 };
 
 /// Глобальная переменная с настройками игры

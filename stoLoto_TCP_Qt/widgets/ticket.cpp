@@ -1,10 +1,21 @@
 #include "ticket.h"
 #include "ticketcell.h"
+#include "utils/config.h"
+#include "utils/debugsettings.h"
 #include <QGridLayout>
+#include <QSet>
+#include <QRandomGenerator>
 
 Ticket::Ticket(QWidget *parent) : QWidget(parent)
 {
 	m_layout = new QGridLayout(this);
+	m_layout->setSpacing(1);
+	m_layout->setMargin(0);
+	m_activeNumCount = 0;
+
+	init();
+
+	adjustSize();
 }
 
 Ticket::~Ticket()
@@ -18,37 +29,26 @@ Ticket::~Ticket()
 void Ticket::init()
 {
 	clear();
-//	m_activeMinesCount = 0;
+	m_activeNumCount = 0;
 
-//	// initial grid creation
-//	m_cells.reserve(g_cfg.m_height);
-//	for (int i = 0; i < g_cfg.m_height; i++) {
-//		QVector<Cell*> t_row;
-//		t_row.reserve(g_cfg.m_width);
-//		for (int j = 0; j < g_cfg.m_width; j++) {
-//			t_row.append(new Cell(this));
-//		}
-//		m_cells.append(t_row);
-//	}
+	m_cells.reserve(g_config.m_vertCountNum);
+	for (int i = 0; i < g_config.m_vertCountNum; i++) {
+		QVector<TicketCell*> t_row;
+		t_row.reserve(g_config.m_horzCountNum);
+		for (int j = 0; j < g_config.m_horzCountNum; j++) {
+			t_row.append(new TicketCell(this));
+		}
+		m_cells.append(t_row);
+	}
 
-//	// Filling in the grid
-//	while(m_activeMinesCount != g_cfg.m_mineCount) {
-//		while(!setMine()) {
-//			// nothing ToDo
-//		}
-//	}
+	setTicketDistribution();
 
-//	// filling Layout
-//	for (int i = 0; i < g_cfg.m_height; i++) {
-//		for (int j = 0; j < g_cfg.m_width; j++) {
-//			m_layout->addWidget(m_cells.at(i).at(j), i, j);
-//		}
-//	}
-
-//	// Determine the number of Mines
-//	setNumbersAboutMines();
-
-//	m_activeFreeCount = g_cfg.m_width * g_cfg.m_width;
+	// filling Layout
+	for (int i = 0; i < g_config.m_vertCountNum; i++) {
+		for (int j = 0; j < g_config.m_horzCountNum; j++) {
+			m_layout->addWidget(m_cells.at(i).at(j), i, j);
+		}
+	}
 }
 
 void Ticket::clear()
@@ -59,4 +59,34 @@ void Ticket::clear()
 		}
 	}
 	m_cells.clear();
+}
+
+void Ticket::setTicketDistribution()
+{
+	QSet<int8_t> indexRepeatsSet;
+	const int repeatCount = g_config.m_goalCountNum - g_config.m_horzCountNum;
+	if (repeatCount > g_config.m_horzCountNum) {
+		DEBUG("Код ошибки: 18-02-2022. Неправильно заданные параметры");
+		return;
+	}
+
+	while (indexRepeatsSet.count() != repeatCount) {
+		indexRepeatsSet << QRandomGenerator::global()->bounded(0, g_config.m_horzCountNum);
+	}
+
+	for (int i = 0; i < g_config.m_horzCountNum; i++) {
+		QSet<int8_t> vertIndexs;
+		while (vertIndexs.count() != (1 + indexRepeatsSet.contains(i))) {
+			vertIndexs << QRandomGenerator::global()->bounded(0, g_config.m_vertCountNum);
+		}
+
+		for (const int8_t& vPosNum: vertIndexs) {
+			int minV = i*10;
+			int maxV = (i+1)*10;
+			if (i == (g_config.m_horzCountNum - 1)) {
+				maxV++;
+			}
+			m_cells[vPosNum][i]->setNumCell(QRandomGenerator::global()->bounded(minV, maxV));
+		}
+	}
 }

@@ -22,8 +22,11 @@ private:
 	QGridLayout		*m_layout;
 	VVCell			m_cells;
 
+	int				m_activeNumCount;
+
 private:
 	void	clear();
+	void	setTicketDistribution();
 };
 
 #endif // TICKET_H
