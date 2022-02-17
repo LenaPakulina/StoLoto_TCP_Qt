@@ -3,5 +3,6 @@
 *.o
 *.a
 *.pro.user*
+*.dll
 build-*
 .~lock*
