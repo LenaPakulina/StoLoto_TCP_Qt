@@ -6,10 +6,12 @@
 #include <QSet>
 #include <QRandomGenerator>
 
+#define COUNT_NUM_IN_LINE (g_config.m_goalCountNum / g_config.m_vertCountNum)
+
 Ticket::Ticket(QWidget *parent) : QWidget(parent)
 {
 	m_layout = new QGridLayout(this);
-	m_layout->setSpacing(1);
+	m_layout->setSpacing(0);
 	m_layout->setMargin(0);
 	m_activeNumCount = 0;
 
@@ -63,30 +65,44 @@ void Ticket::clear()
 
 void Ticket::setTicketDistribution()
 {
-	QSet<int8_t> indexRepeatsSet;
-	const int repeatCount = g_config.m_goalCountNum - g_config.m_horzCountNum;
-	if (repeatCount > g_config.m_horzCountNum) {
-		DEBUG("Код ошибки: 18-02-2022. Неправильно заданные параметры");
-		return;
-	}
-
-	while (indexRepeatsSet.count() != repeatCount) {
-		indexRepeatsSet << QRandomGenerator::global()->bounded(0, g_config.m_horzCountNum);
-	}
-
-	for (int i = 0; i < g_config.m_horzCountNum; i++) {
-		QSet<int8_t> vertIndexs;
-		while (vertIndexs.count() != (1 + indexRepeatsSet.contains(i))) {
-			vertIndexs << QRandomGenerator::global()->bounded(0, g_config.m_vertCountNum);
+	QVector<QSet<int>> ticketLines;
+	QSet<int> tempSet;
+	do {
+		ticketLines.clear();
+		tempSet.clear();
+		for (int i = 0; i < g_config.m_vertCountNum; i++) {
+			QSet<int> line;
+			makeDistributionByLine(line);
+			ticketLines << line;
+			tempSet = tempSet + line;
 		}
+	} while (tempSet.count() != g_config.m_horzCountNum);
 
-		for (const int8_t& vPosNum: vertIndexs) {
-			int minV = i*10;
-			int maxV = (i+1)*10;
-			if (i == (g_config.m_horzCountNum - 1)) {
+	tempSet.clear();
+	for (int i = 0; i < g_config.m_vertCountNum; i++) {
+		const QSet<int>& line = ticketLines[i];
+		for (const int collPosition: line.values()) {
+			int minV = collPosition*10;
+			if (collPosition == 0) {
+				minV += 1;
+			}
+			int maxV = (collPosition+1)*10;
+			if (collPosition == (g_config.m_horzCountNum - 1)) {
 				maxV++;
 			}
-			m_cells[vPosNum][i]->setNumCell(QRandomGenerator::global()->bounded(minV, maxV));
+			int numCell = QRandomGenerator::global()->bounded(minV, maxV);
+			while (tempSet.contains(numCell) == true) {
+				numCell = QRandomGenerator::global()->bounded(minV, maxV);
+			}
+			tempSet << numCell;
+			m_cells[i][collPosition]->setNumCell(numCell);
 		}
+	}
+}
+
+void Ticket::makeDistributionByLine(QSet<int> &indexNum)
+{
+	while (indexNum.count() != COUNT_NUM_IN_LINE) {
+		indexNum << QRandomGenerator::global()->bounded(0, g_config.m_horzCountNum);
 	}
 }

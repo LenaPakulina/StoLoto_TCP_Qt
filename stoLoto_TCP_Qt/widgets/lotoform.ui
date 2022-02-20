@@ -15,15 +15,14 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <widget class="QSplitter" name="splitter">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <widget class="QWidget" name="verticalLayoutWidget">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
       <layout class="QVBoxLayout" name="verticalLayout"/>
-     </widget>
-     <widget class="QTextEdit" name="textEdit"/>
-    </widget>
+     </item>
+     <item>
+      <widget class="QTextEdit" name="textEdit"/>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QGraphicsView" name="graphicsView"/>

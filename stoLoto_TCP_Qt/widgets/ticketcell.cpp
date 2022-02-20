@@ -6,7 +6,8 @@
 TicketCell::TicketCell(QWidget *parent) : QPushButton(parent)
 {
 	m_numCell = -1;
-	setText(TO_STR(m_numCell));
+	setText(QString());
+	setEnabled(false);
 
 	setMinimumHeight(SIDE_SIZE);
 	setMaximumHeight(SIDE_SIZE);
@@ -18,4 +19,5 @@ void TicketCell::setNumCell(int numCell)
 {
 	m_numCell = numCell;
 	setText(TO_STR(m_numCell));
+	setEnabled(true);
 }

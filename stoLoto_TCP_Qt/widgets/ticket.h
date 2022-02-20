@@ -27,6 +27,7 @@ private:
 private:
 	void	clear();
 	void	setTicketDistribution();
+	void	makeDistributionByLine(QSet<int> &indexNum);
 };
 
 #endif // TICKET_H
