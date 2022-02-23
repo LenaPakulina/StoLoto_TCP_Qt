@@ -2,6 +2,7 @@
 #include "ui_lotoform.h"
 #include "ticket.h"
 #include "utils/config.h"
+#include "graphics/scene.h"
 
 LotoForm::LotoForm(QWidget *parent) :
 	QWidget(parent),
@@ -13,6 +14,8 @@ LotoForm::LotoForm(QWidget *parent) :
 		Ticket* ticket = new Ticket(this);
 		ui->verticalLayout->addWidget(ticket);
 	}
+
+	ui->graphicsView->setScene(new Scene(ui->graphicsView));
 }
 
 LotoForm::~LotoForm()

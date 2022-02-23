@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/fonts">
+        <file>mono.ttf</file>
+        <file>microsoftsansserif.ttf</file>
+    </qresource>
+    <qresource prefix="/"/>
+</RCC>

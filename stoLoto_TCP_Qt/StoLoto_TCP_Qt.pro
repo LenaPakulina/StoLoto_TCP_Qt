@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    graphics/barrelitem.cpp \
     graphics/scene.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
     widgets/ticketcell.cpp
 
 HEADERS += \
+    graphics/barrelitem.h \
     graphics/scene.h \
     mainwindow.h \
     utils/config.h \
@@ -37,3 +39,7 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+	resource/fonts/fonts.qrc \
+	resource/resources.qrc

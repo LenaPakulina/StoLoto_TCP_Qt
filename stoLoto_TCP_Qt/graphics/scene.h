@@ -7,7 +7,7 @@ class Scene : public QGraphicsScene
 {
 	Q_OBJECT
 public:
-	Scene();
+	Scene(QObject *parent = nullptr);
 };
 
 #endif // SCENE_H

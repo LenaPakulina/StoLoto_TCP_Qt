@@ -4,6 +4,8 @@
 #include "utils/debugsettings.h"
 #include "widgets/lotoform.h"
 
+#include <QFontDatabase>
+
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
 	, ui(new Ui::MainWindow)
@@ -19,6 +21,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 	ui->stackedWidget->addWidget(m_startForm);
 	ui->stackedWidget->addWidget(m_lotoForm);
+
+	QFontDatabase::addApplicationFont(":/fonts/mono.ttf");
 }
 
 MainWindow::~MainWindow()
