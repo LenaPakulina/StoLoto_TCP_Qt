@@ -4,7 +4,7 @@ Config g_config;
 
 Config::Config()
 {
-	m_ticketCount = 5;
+	m_ticketCount = 4;
 	m_vertCountNum = 3;
 	m_horzCountNum = 9;
 	m_goalCountNum = 15; // 15 из 27 ячекк должны быть заполнены

@@ -4,12 +4,13 @@
 #include <QGraphicsObject>
 #include <QFont>
 #include <QRectF>
+#include <QTimer>
 
 class BarrelItem : public QGraphicsObject
 {
 	Q_OBJECT
 public:
-	BarrelItem(QGraphicsItem *parent = nullptr);
+	BarrelItem(int num, QGraphicsItem *parent = nullptr);
 
 	// QGraphicsItem interface
 public:
@@ -17,10 +18,14 @@ public:
 	QPainterPath shape() const;
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
+private slots:
+	void slotMoved();
+
 private:
 	QRectF		m_form;
 	QFont		m_font;
 	int8_t		m_num;
+	QTimer		m_timer;
 };
 
 #endif // BARRELITEM_H

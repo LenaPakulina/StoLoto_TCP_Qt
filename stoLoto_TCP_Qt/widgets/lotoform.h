@@ -3,6 +3,7 @@
 
 #include <QWidget>
 
+class Scene;
 namespace Ui {
 class LotoForm;
 }
@@ -17,6 +18,7 @@ public:
 
 private:
 	Ui::LotoForm *ui;
+	Scene			*m_scene;
 };
 
 #endif // LOTOFORM_H

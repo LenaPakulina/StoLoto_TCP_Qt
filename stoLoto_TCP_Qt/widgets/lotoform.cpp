@@ -15,7 +15,14 @@ LotoForm::LotoForm(QWidget *parent) :
 		ui->verticalLayout->addWidget(ticket);
 	}
 
-	ui->graphicsView->setScene(new Scene(ui->graphicsView));
+	m_scene = new Scene(ui->graphicsView);
+	ui->graphicsView->setScene(m_scene);
+	ui->graphicsView->setSceneRect(0, 0, maxSceneWidth, maxSceneHeight);
+	ui->graphicsView->setMinimumHeight(maxSceneHeight);
+	ui->graphicsView->setMinimumWidth(maxSceneWidth);
+
+	adjustSize();
+	m_scene->startTimer();
 }
 
 LotoForm::~LotoForm()
